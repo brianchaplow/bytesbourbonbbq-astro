@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Contact" description="Get in touch with Bytes • Bourbon • BBQ.">
+  <article class="mx-auto max-w-3xl px-6 md:px-8 py-16 md:py-24">
+    <h1 class="text-4xl font-bold mb-8">Contact</h1>
+    
+    <div class="prose prose-invert prose-orange max-w-none">
+      <p class="text-xl text-neutral-300">
+        Questions about recipes? Want to talk shop about security and smoke? Let's connect.
+      </p>
+      
+      <div class="not-prose mt-8 space-y-4">
+        <a 
+          href={`mailto:${site.author.email}`}
+          class="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10 hover:border-orange-500/30 transition-colors"
+        >
+          <span class="text-2xl">📧</span>
+          <div>
+            <div class="font-medium">Email</div>
+            <div class="text-sm text-neutral-400">{site.author.email}</div>
+          </div>
+        </a>
+        
+        <a 
+          href={site.author.linkedin}
+          target="_blank"
+          rel="noopener"
+          class="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10 hover:border-orange-500/30 transition-colors"
+        >
+          <span class="text-2xl">💼</span>
+          <div>
+            <div class="font-medium">LinkedIn</div>
+            <div class="text-sm text-neutral-400">Professional network</div>
+          </div>
+        </a>
+        
+        <a 
+          href={site.author.website}
+          target="_blank"
+          rel="noopener"
+          class="flex items-center gap-3 p-4 rounded-lg bg-white/5 border border-white/10 hover:border-orange-500/30 transition-colors"
+        >
+          <span class="text-2xl">🌐</span>
+          <div>
+            <div class="font-medium">Professional Site</div>
+            <div class="text-sm text-neutral-400">{site.author.website.replace('https://', '')}</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RecipeCard from '../../components/RecipeCard.astro';
+import { getCollection } from 'astro:content';
+
+const recipes = await getCollection('recipes', ({ data }) => {
+  return data.draft !== true;
+});
+
+// Sort by date, newest first
+recipes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Recipes" description="BBQ recipes with cybersecurity metaphors. Real smoke, real techniques, real documentation.">
+  
+  {/* Hero */}
+  <section class="relative py-16 md:py-24">
+    <div class="mx-auto max-w-7xl px-6 md:px-8">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
+          The <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Recipe Archive</span>
+        </h1>
+        <p class="mt-4 text-lg text-neutral-400">
+          Every cook is a mission. Every recipe has an after-action report.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* Recipe Grid */}
+  <section class="pb-16 md:pb-24">
+    <div class="mx-auto max-w-7xl px-6 md:px-8">
+      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {recipes.map(recipe => (
+          <RecipeCard
+            title={recipe.data.title}
+            description={recipe.data.description}
+            image={recipe.data.image}
+            href={`/recipes/${recipe.slug}/`}
+            cyber_concept={recipe.data.cyber_concept}
+            cook_time={recipe.data.cook_time}
+            difficulty={recipe.data.difficulty}
+          />
+        ))}
+      </div>
+      
+      {recipes.length === 0 && (
+        <p class="text-center text-neutral-500 py-12">
+          No recipes yet. The smoker is warming up...
+        </p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
