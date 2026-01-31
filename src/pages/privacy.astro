@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Privacy Policy" description="Privacy policy for Bytes • Bourbon • BBQ — what we collect, what we don't, and your rights.">
+  <article class="mx-auto max-w-3xl px-6 md:px-8 py-16 md:py-24">
+    <h1 class="text-4xl font-bold mb-2">Privacy Policy</h1>
+    <p class="text-sm text-neutral-500 mb-8">Last updated: January 2025</p>
+
+    <div class="prose prose-invert prose-orange max-w-none">
+      <p class="text-xl text-neutral-300 leading-relaxed">
+        <strong>{site.title}</strong> respects your privacy. This policy explains what data we collect,
+        how we use it, and what rights you have.
+      </p>
+
+      <h2>Analytics</h2>
+      <p>
+        This site uses <strong>Umami</strong>, a privacy-focused, self-hosted analytics platform. Umami does not
+        use cookies, does not collect personal data, and does not track you across sites. All data is
+        aggregate-only — we see page view counts and referrer sources, not individual visitors.
+      </p>
+      <p>
+        No personal information is stored by our analytics. No fingerprinting. No IP logging.
+        Umami is GDPR-compliant by design.
+      </p>
+
+      <h2>Newsletter</h2>
+      <p>
+        If you subscribe to the newsletter, your email address is stored by <strong>Mailchimp</strong>,
+        our email service provider. We collect your email address only — nothing else.
+      </p>
+      <p>
+        Every newsletter includes an unsubscribe link. We do not sell, share, or rent your email
+        address to any third party, ever.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        This site does not set tracking cookies. Our analytics platform (Umami) is cookieless.
+        However, if you interact with embedded Mailchimp signup forms, Mailchimp may set its own
+        cookies according to their privacy policy.
+      </p>
+
+      <h2>Contact Messages</h2>
+      <p>
+        If you reach out via the contact page or email, your message goes directly to the site owner.
+        Messages are not stored in any database, CRM, or third-party platform beyond standard email.
+      </p>
+
+      <h2>External Links</h2>
+      <p>
+        This site contains links to external websites (LinkedIn, GitHub, etc.). We are not responsible
+        for the privacy practices of those sites. When you follow an external link, you are subject
+        to that site's privacy policy.
+      </p>
+
+      <h2>Your Rights</h2>
+      <p>
+        You have the right to:
+      </p>
+      <ul>
+        <li>Request what information (if any) we hold about you</li>
+        <li>Request deletion of your data (e.g., newsletter unsubscription)</li>
+        <li>Ask questions about this policy</li>
+      </ul>
+      <p>
+        To exercise any of these rights, email <a href={`mailto:${site.author.email}`}>{site.author.email}</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

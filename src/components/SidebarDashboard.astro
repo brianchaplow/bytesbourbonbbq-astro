@@ -1,0 +1,195 @@
+---
+interface Props {
+  recipeCounts: Record<string, number>;
+  totalRecipes: number;
+}
+
+const { recipeCounts, totalRecipes } = Astro.props;
+---
+
+<aside class="sidebar-dashboard hidden 3xl:block w-72 shrink-0 space-y-4 text-xs font-mono">
+
+  {/* Grill Status */}
+  <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+    <h3 class="text-[10px] uppercase tracking-widest text-neutral-500 mb-3">Grill Status</h3>
+    <div class="space-y-2">
+      <div class="flex items-center justify-between">
+        <span class="text-neutral-300">Primary</span>
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="text-emerald-400">ONLINE</span>
+        </span>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-neutral-300">Backup</span>
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+          <span class="text-amber-400">STANDBY</span>
+        </span>
+      </div>
+      <div class="flex items-center justify-between">
+        <span class="text-neutral-300">Flat Top</span>
+        <span class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-neutral-500"></span>
+          <span class="text-neutral-400">IDLE</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  {/* Pit Temperature */}
+  <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+    <h3 class="text-[10px] uppercase tracking-widest text-neutral-500 mb-3">Pit Temperature</h3>
+    <div class="flex items-end gap-2 mb-2">
+      <span class="text-3xl font-bold text-orange-400">225</span>
+      <span class="text-neutral-500 mb-1">&deg;F target</span>
+    </div>
+    <div class="w-full h-2 bg-neutral-700 rounded-full overflow-hidden">
+      <div class="h-full w-[88%] rounded-full bg-gradient-to-r from-orange-600 to-orange-400"></div>
+    </div>
+    <div class="flex justify-between mt-1 text-[10px] text-neutral-600">
+      <span>150&deg;</span>
+      <span>225&deg;</span>
+      <span>300&deg;</span>
+    </div>
+  </div>
+
+  {/* Smoke Output */}
+  <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+    <h3 class="text-[10px] uppercase tracking-widest text-neutral-500 mb-3">Smoke Output</h3>
+    <div class="flex items-center gap-2">
+      <span class="text-neutral-300">Thin Blue</span>
+      <div class="flex-1 h-2 bg-neutral-700 rounded-full overflow-hidden">
+        <div class="h-full w-[72%] rounded-full bg-gradient-to-r from-blue-600 to-blue-400"></div>
+      </div>
+      <span class="text-blue-400">72%</span>
+    </div>
+  </div>
+
+  {/* Wood Supply */}
+  <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+    <h3 class="text-[10px] uppercase tracking-widest text-neutral-500 mb-3">Wood Supply</h3>
+    <div class="space-y-2">
+      <div>
+        <div class="flex justify-between mb-1 text-neutral-400">
+          <span>Hickory</span><span>85%</span>
+        </div>
+        <div class="w-full h-1.5 bg-neutral-700 rounded-full overflow-hidden">
+          <div class="h-full w-[85%] rounded-full bg-amber-600"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-1 text-neutral-400">
+          <span>Oak</span><span>60%</span>
+        </div>
+        <div class="w-full h-1.5 bg-neutral-700 rounded-full overflow-hidden">
+          <div class="h-full w-[60%] rounded-full bg-amber-700"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-1 text-neutral-400">
+          <span>Cherry</span><span>40%</span>
+        </div>
+        <div class="w-full h-1.5 bg-neutral-700 rounded-full overflow-hidden">
+          <div class="h-full w-[40%] rounded-full bg-red-700"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between mb-1 text-neutral-400">
+          <span>Mesquite</span><span>95%</span>
+        </div>
+        <div class="w-full h-1.5 bg-neutral-700 rounded-full overflow-hidden">
+          <div class="h-full w-[95%] rounded-full bg-yellow-700"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Ops by Category */}
+  <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+    <h3 class="text-[10px] uppercase tracking-widest text-neutral-500 mb-3">Ops by Category</h3>
+    <div class="space-y-1.5">
+      <div class="flex justify-between text-neutral-400">
+        <span>Low &amp; Slow</span><span class="text-red-400">{recipeCounts['low-slow'] || 0}</span>
+      </div>
+      <div class="flex justify-between text-neutral-400">
+        <span>Hot &amp; Fast</span><span class="text-amber-400">{recipeCounts['hot-fast'] || 0}</span>
+      </div>
+      <div class="flex justify-between text-neutral-400">
+        <span>Cold Ops</span><span class="text-cyan-400">{recipeCounts['cold-ops'] || 0}</span>
+      </div>
+      <div class="flex justify-between text-neutral-400">
+        <span>Auxiliary</span><span class="text-emerald-400">{recipeCounts['auxiliary'] || 0}</span>
+      </div>
+      <div class="flex justify-between text-neutral-400">
+        <span>Tooling</span><span class="text-purple-400">{recipeCounts['tooling'] || 0}</span>
+      </div>
+      <div class="flex justify-between text-neutral-300 border-t border-white/10 pt-1.5 mt-1.5">
+        <span>Total</span><span class="text-orange-400">{totalRecipes}</span>
+      </div>
+    </div>
+  </div>
+
+  {/* Alert Summary */}
+  <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+    <h3 class="text-[10px] uppercase tracking-widest text-neutral-500 mb-3">Alert Summary</h3>
+    <div class="space-y-1.5">
+      <div class="flex justify-between text-neutral-400">
+        <span>Critical</span><span class="text-red-400">0</span>
+      </div>
+      <div class="flex justify-between text-neutral-400">
+        <span>Warning</span><span class="text-amber-400">0</span>
+      </div>
+      <div class="flex justify-between text-neutral-400">
+        <span>Info</span><span class="text-blue-400">3</span>
+      </div>
+    </div>
+  </div>
+
+  {/* System Status */}
+  <div class="bg-white/5 border border-white/10 rounded-lg p-4">
+    <h3 class="text-[10px] uppercase tracking-widest text-neutral-500 mb-3">System Status</h3>
+    <div class="space-y-1.5">
+      <div class="flex items-center justify-between text-neutral-400">
+        <span>SIEM</span>
+        <span class="text-emerald-400">OK</span>
+      </div>
+      <div class="flex items-center justify-between text-neutral-400">
+        <span>IDS</span>
+        <span class="text-emerald-400">OK</span>
+      </div>
+      <div class="flex items-center justify-between text-neutral-400">
+        <span>Suricata</span>
+        <span class="text-emerald-400">OK</span>
+      </div>
+      <div class="flex items-center justify-between text-neutral-400">
+        <span>OpenSearch</span>
+        <span class="text-emerald-400">OK</span>
+      </div>
+    </div>
+  </div>
+
+  {/* Live Timestamp */}
+  <div class="bg-white/5 border border-white/10 rounded-lg p-4 text-center">
+    <div class="text-[10px] uppercase tracking-widest text-neutral-500 mb-1">System Clock</div>
+    <div id="sidebarClock" class="text-lg text-neutral-300">--:--:--</div>
+    <div id="sidebarDate" class="text-[10px] text-neutral-500 mt-0.5">----/--/--</div>
+  </div>
+
+</aside>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const clock = document.getElementById('sidebarClock');
+    const dateEl = document.getElementById('sidebarDate');
+    if (clock) {
+      clock.textContent = now.toLocaleTimeString('en-US', { hour12: false });
+    }
+    if (dateEl) {
+      dateEl.textContent = now.toISOString().slice(0, 10);
+    }
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>

@@ -1,0 +1,78 @@
+---
+import { getCategoryBySlug } from '../data/categories';
+
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  category?: string;
+  cyber_concept?: string;
+  ttr?: string;
+  total_time?: string;
+  difficulty?: string;
+}
+
+const { title, description, href, category = 'auxiliary', cyber_concept, ttr, total_time, difficulty } = Astro.props;
+const cat = getCategoryBySlug(category);
+const displayTtr = ttr || total_time || '—';
+---
+
+<article
+  class:list={[
+    "ops-card relative bg-neutral-100 rounded-sm border border-neutral-300 p-5 pl-10 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 border-l-4",
+    cat.borderColor
+  ]}
+  data-category={category}
+>
+  {/* Hole punches */}
+  <div class="absolute left-2 top-4 w-3 h-3 rounded-full bg-neutral-800/80 border border-neutral-400 shadow-inner"></div>
+  <div class="absolute left-2 bottom-4 w-3 h-3 rounded-full bg-neutral-800/80 border border-neutral-400 shadow-inner"></div>
+
+  {/* Header row */}
+  <div class="flex items-start justify-between gap-3 mb-2">
+    <h3 class="text-base font-semibold leading-snug">
+      <a href={href} class="text-neutral-900 hover:text-orange-600 transition-colors">{title}</a>
+    </h3>
+    <span class="shrink-0 text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-100 text-emerald-700 border border-emerald-300">
+      Reviewed
+    </span>
+  </div>
+
+  {/* Tags row */}
+  <div class="flex flex-wrap items-center gap-2 mb-3 text-xs">
+    <span class:list={["px-2 py-0.5 rounded font-mono", cat.bgColor, cat.textColor, "!text-neutral-700 !bg-opacity-40"]}>
+      {cat.label}
+    </span>
+    {cyber_concept && (
+      <span class="px-2 py-0.5 rounded bg-cyan-100 text-cyan-800 font-mono">
+        {cyber_concept}
+      </span>
+    )}
+    <span class="ml-auto text-neutral-500 font-mono">
+      TTR: {displayTtr}
+    </span>
+  </div>
+
+  {/* Description */}
+  <p class="text-sm text-neutral-600 leading-relaxed line-clamp-2 mb-3">{description}</p>
+
+  {/* Footer */}
+  <a
+    href={href}
+    class="inline-flex items-center gap-1 text-sm font-medium text-orange-600 hover:text-orange-700 transition-colors"
+  >
+    Execute <span aria-hidden="true">&rarr;</span>
+  </a>
+</article>
+
+<style>
+  .ops-card {
+    background-image:
+      repeating-linear-gradient(
+        transparent,
+        transparent 27px,
+        rgba(0, 0, 0, 0.03) 27px,
+        rgba(0, 0, 0, 0.03) 28px
+      );
+  }
+</style>

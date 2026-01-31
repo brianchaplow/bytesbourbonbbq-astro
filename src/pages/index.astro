@@ -8,22 +8,34 @@ const recipes = await getCollection('recipes', ({ data }) => {
   return data.draft !== true;
 });
 
-// Get latest 6 recipes
+// Get latest 3 recipes
 const latestRecipes = recipes
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 6);
+  .slice(0, 3);
 
 // Random delivery message
 const deliveryMessage = site.deliveryMessages[Math.floor(Math.random() * site.deliveryMessages.length)];
+
+// Random hero image from recipes that have one
+const heroImages = recipes.map(r => r.data.image).filter(Boolean) as string[];
+const randomHero = heroImages[Math.floor(Math.random() * heroImages.length)];
 ---
 
 <BaseLayout>
   
   {/* Hero */}
-  <section class="relative isolate overflow-hidden">
-    {/* Background effects */}
-    <div class="absolute inset-0 -z-10">
-      <div class="absolute inset-0 bg-gradient-to-b from-orange-500/5 via-transparent to-transparent"></div>
+  <section class="relative isolate overflow-hidden bg-black">
+    {/* Background hero image */}
+    <div class="absolute inset-0 -z-10 overflow-hidden">
+      {randomHero && (
+        <img
+          src={randomHero}
+          alt=""
+          class="absolute inset-0 w-full h-full object-cover opacity-0 animate-[fadeIn_2s_ease-out_forwards]"
+          loading="eager"
+        />
+      )}
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 via-75% to-black to-90%"></div>
       <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-orange-500/10 blur-[120px] rounded-full"></div>
     </div>
     
@@ -121,3 +133,10 @@ const deliveryMessage = site.deliveryMessages[Math.floor(Math.random() * site.de
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.5; }
+  }
+</style>
