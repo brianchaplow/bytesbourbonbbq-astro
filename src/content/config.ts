@@ -15,6 +15,7 @@ const recipes = defineCollection({
     servings: z.string().optional(),
     difficulty: z.enum(['easy', 'intermediate', 'advanced']).optional(),
     category: z.string().optional(),
+    ttr: z.string().optional(),
     tags: z.array(z.string()).optional(),
     ingredients: z.array(z.string()).optional(),
     instructions: z.array(z.string()).optional(),

@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import RecipeCard from '../../components/RecipeCard.astro';
+import RecipeOpsCard from '../../components/RecipeOpsCard.astro';
+import SidebarDashboard from '../../components/SidebarDashboard.astro';
 import { getCollection } from 'astro:content';
+import { categories } from '../../data/categories';
 
 const recipes = await getCollection('recipes', ({ data }) => {
   return data.draft !== true;
@@ -9,14 +11,33 @@ const recipes = await getCollection('recipes', ({ data }) => {
 
 // Sort by date, newest first
 recipes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Count recipes per category for sidebar
+const recipeCounts: Record<string, number> = {};
+for (const r of recipes) {
+  const cat = r.data.category || 'auxiliary';
+  recipeCounts[cat] = (recipeCounts[cat] || 0) + 1;
+}
 ---
 
 <BaseLayout title="Recipes" description="BBQ recipes with cybersecurity metaphors. Real smoke, real techniques, real documentation.">
-  
+
   {/* Hero */}
-  <section class="relative py-16 md:py-24">
-    <div class="mx-auto max-w-7xl px-6 md:px-8">
+  <section class="relative py-12 md:py-16 overflow-hidden isolate bg-black">
+    {/* Background hero image */}
+    <div class="absolute inset-0 -z-10 overflow-hidden">
+      <img
+        src="/images/recipes/reverse-sear-ribeye/hero.jpg"
+        alt=""
+        class="absolute inset-0 w-full h-full object-cover opacity-0 animate-[fadeIn_2s_ease-out_forwards]"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/80 via-70% to-black to-90%"></div>
+    </div>
+
+    <div class="mx-auto max-w-7xl 3xl:max-w-[1600px] px-6 md:px-8">
       <div class="text-center max-w-3xl mx-auto">
+        <p class="text-xs font-mono uppercase tracking-[0.3em] text-orange-400 mb-3">Operations Manual</p>
         <h1 class="text-4xl md:text-5xl font-bold tracking-tight">
           The <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Recipe Archive</span>
         </h1>
@@ -27,28 +48,289 @@ recipes.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
     </div>
   </section>
 
-  {/* Recipe Grid */}
+  {/* Main content with sidebar */}
   <section class="pb-16 md:pb-24">
-    <div class="mx-auto max-w-7xl px-6 md:px-8">
-      <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {recipes.map(recipe => (
-          <RecipeCard
-            title={recipe.data.title}
-            description={recipe.data.description}
-            image={recipe.data.image}
-            href={`/recipes/${recipe.slug}/`}
-            cyber_concept={recipe.data.cyber_concept}
-            cook_time={recipe.data.cook_time}
-            difficulty={recipe.data.difficulty}
-          />
-        ))}
+    <div class="mx-auto max-w-7xl 3xl:max-w-[1600px] px-6 md:px-8">
+      <div class="flex gap-8">
+
+        {/* Binder */}
+        <div class="flex-1 min-w-0">
+
+          {/* Tab bar */}
+          <div class="binder-tabs flex overflow-x-auto gap-0 -mb-px scrollbar-hide" role="tablist">
+            {categories.map((cat, i) => (
+              <button
+                role="tab"
+                aria-selected={i === 0 ? "true" : "false"}
+                data-tab={cat.slug}
+                class:list={[
+                  "binder-tab relative shrink-0 px-4 py-2.5 text-xs font-mono uppercase tracking-wider border border-t-2 border-white/10 rounded-t-lg transition-colors whitespace-nowrap",
+                  i === 0
+                    ? "bg-neutral-900 text-orange-400 border-b-neutral-900 z-10"
+                    : "bg-neutral-800/50 text-neutral-500 hover:text-neutral-300 -ml-px"
+                ]}
+                style={`border-top-color: ${cat.tabColor}`}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Binder body */}
+          <div class="binder-body relative">
+            {/* Spine */}
+            <div class="binder-spine absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-neutral-800 to-neutral-900 border-r border-white/5 z-10 hidden md:flex flex-col items-center justify-center gap-16">
+              {/* Rings */}
+              <div class="binder-ring"></div>
+              <div class="binder-ring"></div>
+              <div class="binder-ring"></div>
+            </div>
+
+            {/* Page area */}
+            <div class="binder-page relative bg-neutral-900 border border-white/10 border-t-0 rounded-b-lg md:ml-12 overflow-hidden">
+              {/* Stacked pages behind */}
+              <div class="stacked-pages"></div>
+
+              {/* Plastic sleeve overlay */}
+              <div class="plastic-sleeve pointer-events-none absolute inset-0 z-20"></div>
+
+              {/* Category description */}
+              <div class="px-6 pt-6 pb-2">
+                <p id="categoryDesc" class="text-sm text-neutral-500 font-mono">
+                  {categories[0].description}
+                </p>
+                <div class="mt-3 h-px bg-white/5"></div>
+              </div>
+
+              {/* Hole punches along left side */}
+              <div class="absolute left-3 top-0 bottom-0 hidden md:flex flex-col justify-around py-8 z-10 pointer-events-none">
+                <div class="w-2.5 h-2.5 rounded-full bg-neutral-800 border border-neutral-600"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-neutral-800 border border-neutral-600"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-neutral-800 border border-neutral-600"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-neutral-800 border border-neutral-600"></div>
+                <div class="w-2.5 h-2.5 rounded-full bg-neutral-800 border border-neutral-600"></div>
+              </div>
+
+              {/* Cards container */}
+              <div id="recipeContainer" class="binder-content p-6 md:pl-10 grid gap-4">
+                {recipes.map(recipe => (
+                  <RecipeOpsCard
+                    title={recipe.data.title}
+                    description={recipe.data.description}
+                    href={`/recipes/${recipe.slug}/`}
+                    category={recipe.data.category}
+                    cyber_concept={recipe.data.cyber_concept}
+                    ttr={recipe.data.ttr}
+                    total_time={recipe.data.total_time}
+                    difficulty={recipe.data.difficulty}
+                  />
+                ))}
+              </div>
+
+              {/* Empty state */}
+              <div id="emptyState" class="hidden p-12 text-center text-neutral-500 font-mono text-sm">
+                No operations found in this category.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Sidebar */}
+        <SidebarDashboard recipeCounts={recipeCounts} totalRecipes={recipes.length} />
       </div>
-      
-      {recipes.length === 0 && (
-        <p class="text-center text-neutral-500 py-12">
-          No recipes yet. The smoker is warming up...
-        </p>
-      )}
     </div>
   </section>
+
 </BaseLayout>
+
+{/* Tab filtering JS */}
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.binder-tab');
+  const cards = document.querySelectorAll<HTMLElement>('.ops-card');
+  const descEl = document.getElementById('categoryDesc');
+  const container = document.getElementById('recipeContainer');
+  const emptyState = document.getElementById('emptyState');
+  const binderPage = document.querySelector<HTMLElement>('.binder-page');
+  let animating = false;
+
+  const descriptions: Record<string, string> = {
+    'all': 'Complete procedure index',
+    'low-slow': 'APT-class operations requiring extended monitoring',
+    'hot-fast': 'Rapid response protocols with high-heat execution',
+    'cold-ops': 'Reconnaissance, curing, and intelligence gathering',
+    'auxiliary': 'Support operations and force multipliers',
+    'tooling': 'Detection signatures, scripts, and baseline configurations',
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      if (animating) return;
+      const slug = tab.dataset.tab;
+      if (!slug) return;
+
+      // Check if already active
+      if (tab.getAttribute('aria-selected') === 'true') return;
+
+      animating = true;
+
+      // Update tab styles
+      tabs.forEach(t => {
+        const isActive = t === tab;
+        t.setAttribute('aria-selected', String(isActive));
+        if (isActive) {
+          t.classList.add('bg-neutral-900', 'text-orange-400', 'border-b-neutral-900', 'z-10');
+          t.classList.remove('bg-neutral-800/50', 'text-neutral-500', '-ml-px');
+        } else {
+          t.classList.remove('bg-neutral-900', 'text-orange-400', 'border-b-neutral-900', 'z-10');
+          t.classList.add('bg-neutral-800/50', 'text-neutral-500');
+          // Re-add -ml-px for non-first inactive tabs
+          if (t !== tabs[0]) t.classList.add('-ml-px');
+        }
+      });
+
+      // Flip out
+      binderPage?.classList.add('flip-out');
+
+      setTimeout(() => {
+        // Filter cards
+        let visibleCount = 0;
+        cards.forEach(card => {
+          const cardCat = card.dataset.category;
+          const show = slug === 'all' || cardCat === slug;
+          card.style.display = show ? '' : 'none';
+          if (show) visibleCount++;
+        });
+
+        // Update description
+        if (descEl) descEl.textContent = descriptions[slug] || '';
+
+        // Empty state
+        if (emptyState && container) {
+          emptyState.classList.toggle('hidden', visibleCount > 0);
+          container.classList.toggle('hidden', visibleCount === 0);
+        }
+
+        // Flip in
+        binderPage?.classList.remove('flip-out');
+        binderPage?.classList.add('flip-in');
+
+        setTimeout(() => {
+          binderPage?.classList.remove('flip-in');
+          animating = false;
+        }, 300);
+      }, 300);
+    });
+  });
+</script>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.3; }
+  }
+
+  /* Binder spine rings */
+  .binder-ring {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      #888 0deg,
+      #ccc 60deg,
+      #666 120deg,
+      #aaa 180deg,
+      #888 240deg,
+      #ccc 300deg,
+      #888 360deg
+    );
+    box-shadow:
+      inset 0 2px 4px rgba(0,0,0,0.5),
+      inset 0 -1px 2px rgba(255,255,255,0.2),
+      0 1px 3px rgba(0,0,0,0.4);
+    position: relative;
+  }
+
+  .binder-ring::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #555 0%, #333 100%);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
+  }
+
+  /* Stacked pages behind the main page */
+  .stacked-pages {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .stacked-pages::before,
+  .stacked-pages::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0 0 0.5rem 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .stacked-pages::before {
+    transform: translate(2px, 3px);
+    background: rgba(23, 23, 23, 0.8);
+  }
+
+  .stacked-pages::after {
+    transform: translate(4px, 6px);
+    background: rgba(20, 20, 20, 0.6);
+  }
+
+  /* Plastic sleeve glossy overlay */
+  .plastic-sleeve {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.02) 0%,
+      rgba(255, 255, 255, 0.04) 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.01) 75%,
+      transparent 100%
+    );
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+
+  /* Page flip animations */
+  .binder-page {
+    perspective: 1200px;
+    transform-origin: left center;
+    transition: transform 0.3s ease;
+  }
+
+  .flip-out {
+    animation: flipOut 0.3s ease forwards;
+  }
+
+  .flip-in {
+    animation: flipIn 0.3s ease forwards;
+  }
+
+  @keyframes flipOut {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(-15deg); }
+  }
+
+  @keyframes flipIn {
+    0% { transform: rotateY(15deg); }
+    100% { transform: rotateY(0deg); }
+  }
+
+  /* Scrollbar hide for tab overflow */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
