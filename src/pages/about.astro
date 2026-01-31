@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="About" description="The story behind Bytes • Bourbon • BBQ — where cybersecurity meets live-fire cooking.">
+  <article class="mx-auto max-w-3xl px-6 md:px-8 py-16 md:py-24">
+    <h1 class="text-4xl font-bold mb-8">About the Pit</h1>
+    
+    <div class="prose prose-invert prose-orange max-w-none">
+      <p class="text-xl text-neutral-300 leading-relaxed">
+        <strong>Bytes • Bourbon • BBQ</strong> is where cybersecurity meets live-fire cooking. 
+        Real BBQ. Real photos. Real engineering mindset.
+      </p>
+      
+      <h2>The Philosophy</h2>
+      <p>
+        Every cook is a mission. Every recipe has variables, constraints, and an after-action report. 
+        We approach the pit the same way we approach security operations: with methodology, 
+        measurement, and continuous improvement.
+      </p>
+      
+      <h2>The Author</h2>
+      <p>
+        I'm <a href={site.author.website}>Brian Chaplow</a>, a 26-year U.S. Navy veteran turned 
+        cybersecurity professional. I bring mission discipline to both domains: clear procedures, 
+        rapid decisions, and rigorous documentation.
+      </p>
+      <p>
+        By day, I work in threat intelligence and SOC operations. By night, I tend fire and smoke.
+        The skills transfer more than you'd expect.
+      </p>
+      
+      <h2>Why BBQ + Cyber?</h2>
+      <p>
+        Both require:
+      </p>
+      <ul>
+        <li><strong>Observation</strong> — Reading the smoke, reading the logs</li>
+        <li><strong>Patience</strong> — Low and slow, or fast and focused</li>
+        <li><strong>Adaptation</strong> — No cook goes exactly to plan</li>
+        <li><strong>Documentation</strong> — What worked, what didn't, what's next</li>
+      </ul>
+      
+      <h2>Connect</h2>
+      <p>
+        Find me on <a href={site.author.linkedin}>LinkedIn</a> or check out my 
+        professional work at <a href={site.author.website}>{site.author.website.replace('https://', '')}</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,268 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { site } from '../data/site';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    subtitle?: string;
+    description: string;
+    date: Date;
+    image?: string;
+    cyber_concept?: string;
+    prep_time?: string;
+    cook_time?: string;
+    total_time?: string;
+    servings?: string;
+    difficulty?: string;
+    tags?: string[];
+    ingredients?: string[];
+    instructions?: string[];
+    custom_spice_blend?: string[];
+    aar?: {
+      worked?: string;
+      adjust?: string;
+      lessons?: string;
+    };
+  };
+}
+
+const { frontmatter } = Astro.props;
+const { 
+  title, subtitle, description, date, image, cyber_concept,
+  prep_time, cook_time, total_time, servings, difficulty, tags,
+  ingredients, instructions, custom_spice_blend, aar 
+} = frontmatter;
+
+// ISO date for schema
+const isoDate = date.toISOString().split('T')[0];
+
+// Format readable date
+const readableDate = date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+// Convert time to ISO 8601 duration
+function toISO8601Duration(str: string): string {
+  if (!str) return '';
+  const text = str.toLowerCase();
+  
+  const hourMatch = text.match(/(\d+(?:\.\d+)?)\s*(?:hour|hr|h)/);
+  const minMatch = text.match(/(\d+)\s*(?:min|m(?:inute)?)/);
+  const dayMatch = text.match(/(\d+)\s*(?:day|d)/);
+  
+  if (dayMatch && !hourMatch && !minMatch) {
+    return `P${dayMatch[1]}D`;
+  }
+  
+  let duration = 'PT';
+  if (hourMatch) {
+    const hours = parseFloat(hourMatch[1]);
+    const wholeHours = Math.floor(hours);
+    const mins = Math.round((hours - wholeHours) * 60);
+    if (wholeHours) duration += `${wholeHours}H`;
+    if (mins) duration += `${mins}M`;
+  }
+  if (minMatch) {
+    duration += `${minMatch[1]}M`;
+  }
+  
+  return duration === 'PT' ? '' : duration;
+}
+---
+
+<BaseLayout title={title} description={description} image={image} type="article">
+  
+  {/* Hero with image */}
+  {image && (
+    <section class="relative isolate -mt-[72px] pt-[72px]">
+      <img 
+        src={image} 
+        alt={title}
+        class="h-[50vh] w-full object-cover opacity-80 animate-herofade"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 mx-auto max-w-5xl px-6 md:px-8 pb-10">
+        {cyber_concept && (
+          <span class="inline-block px-3 py-1 text-sm rounded-full bg-orange-500/20 text-orange-300 ring-1 ring-orange-500/30 mb-4">
+            {cyber_concept}
+          </span>
+        )}
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">{title}</h1>
+        {subtitle && (
+          <p class="mt-2 text-lg md:text-2xl text-neutral-200 max-w-3xl">{subtitle}</p>
+        )}
+        <div class="mt-4 flex flex-wrap gap-4 text-sm text-neutral-300">
+          {cook_time && <span>🔥 {cook_time}</span>}
+          {prep_time && <span>⏱️ {prep_time}</span>}
+          {servings && <span>🍽️ {servings}</span>}
+          {difficulty && <span class="capitalize">📊 {difficulty}</span>}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* Fallback header */}
+  {!image && (
+    <header class="mx-auto max-w-3xl px-6 md:px-8 py-12">
+      {cyber_concept && (
+        <span class="inline-block px-3 py-1 text-sm rounded-full bg-orange-500/20 text-orange-300 ring-1 ring-orange-500/30 mb-4">
+          {cyber_concept}
+        </span>
+      )}
+      <h1 class="text-3xl md:text-4xl font-semibold leading-tight">{title}</h1>
+      {subtitle && (
+        <p class="mt-2 text-xl text-neutral-400 italic">{subtitle}</p>
+      )}
+    </header>
+  )}
+
+  <article class="mx-auto max-w-3xl px-6 md:px-8 py-12">
+    
+    {/* Meta */}
+    <div class="flex flex-wrap items-center gap-4 text-sm text-neutral-400 mb-8 pb-8 border-b border-white/10">
+      <time datetime={isoDate}>{readableDate}</time>
+      {tags && tags.length > 0 && (
+        <div class="flex flex-wrap gap-2">
+          {tags.map(tag => (
+            <span class="px-2 py-1 rounded bg-white/5 text-xs">{tag}</span>
+          ))}
+        </div>
+      )}
+    </div>
+
+    {/* Main content */}
+    <div class="prose prose-invert prose-orange max-w-none">
+      <slot />
+    </div>
+
+    {/* Custom Spice Blend */}
+    {custom_spice_blend && custom_spice_blend.length > 0 && (
+      <section id="spice-blend" class="mt-12 pt-8 border-t border-white/10">
+        <h2 class="text-2xl font-semibold mb-6">Custom Spice Blend</h2>
+        <ul class="grid gap-2 sm:grid-cols-2">
+          {custom_spice_blend.map(item => (
+            <li class="flex items-start gap-2">
+              <span class="text-orange-400 mt-1">•</span>
+              <span class="text-neutral-200">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {/* Ingredients */}
+    {ingredients && ingredients.length > 0 && (
+      <section id="ingredients" class="mt-12 pt-8 border-t border-white/10">
+        <h2 class="text-2xl font-semibold mb-6">Ingredients</h2>
+        <ul class="grid gap-2 sm:grid-cols-2">
+          {ingredients.map(item => (
+            <li class="flex items-start gap-2">
+              <span class="text-orange-400 mt-1">•</span>
+              <span class="text-neutral-200">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    {/* Instructions */}
+    {instructions && instructions.length > 0 && (
+      <section id="instructions" class="mt-12 pt-8 border-t border-white/10">
+        <h2 class="text-2xl font-semibold mb-6">Instructions</h2>
+        <ol class="space-y-4">
+          {instructions.map((step, i) => (
+            <li id={`step-${i + 1}`} class="flex gap-4">
+              <span class="flex-shrink-0 w-8 h-8 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center text-sm font-bold">
+                {i + 1}
+              </span>
+              <p class="text-neutral-200 pt-1">{step}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+    )}
+
+    {/* After Action Report */}
+    {aar && (
+      <section id="aar" class="mt-12 pt-8 border-t border-white/10">
+        <h2 class="text-2xl font-semibold mb-6">After Action Report</h2>
+        <div class="space-y-6">
+          {aar.worked && (
+            <div class="p-4 rounded-lg bg-green-500/10 border border-green-500/20">
+              <h3 class="text-sm font-semibold text-green-400 uppercase tracking-wide mb-2">What Worked</h3>
+              <p class="text-neutral-200">{aar.worked}</p>
+            </div>
+          )}
+          {aar.adjust && (
+            <div class="p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/20">
+              <h3 class="text-sm font-semibold text-yellow-400 uppercase tracking-wide mb-2">Adjustments for Next Time</h3>
+              <p class="text-neutral-200">{aar.adjust}</p>
+            </div>
+          )}
+          {aar.lessons && (
+            <div class="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20">
+              <h3 class="text-sm font-semibold text-blue-400 uppercase tracking-wide mb-2">Lessons Learned</h3>
+              <p class="text-neutral-200">{aar.lessons}</p>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    {/* Back link */}
+    <div class="mt-12 pt-8 border-t border-white/10">
+      <a href="/recipes/" class="text-orange-400 hover:text-orange-300 text-sm">
+        ← Back to Recipes
+      </a>
+    </div>
+  </article>
+
+  {/* Recipe Schema JSON-LD */}
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Recipe",
+    name: title,
+    description: description,
+    author: {
+      "@type": "Person",
+      name: site.author.name,
+      url: site.author.website
+    },
+    datePublished: isoDate,
+    image: image ? {
+      "@type": "ImageObject",
+      url: `${site.url}${image}`,
+      height: 800,
+      width: 1200
+    } : undefined,
+    ...(prep_time && { prepTime: toISO8601Duration(prep_time) }),
+    ...(cook_time && { cookTime: toISO8601Duration(cook_time) }),
+    ...(total_time && { totalTime: toISO8601Duration(total_time) }),
+    ...(servings && { recipeYield: servings }),
+    recipeCategory: "BBQ",
+    recipeCuisine: "American",
+    keywords: [...(tags || []), cyber_concept].filter(Boolean).join(', '),
+    ...(ingredients && { recipeIngredient: ingredients }),
+    ...(instructions && {
+      recipeInstructions: instructions.map((step, i) => ({
+        "@type": "HowToStep",
+        position: i + 1,
+        name: `Step ${i + 1}`,
+        text: step,
+        url: `${site.url}${Astro.url.pathname}#step-${i + 1}`
+      }))
+    }),
+    publisher: {
+      "@type": "Organization",
+      name: site.title,
+      url: site.url,
+      logo: {
+        "@type": "ImageObject",
+        url: `${site.url}/images/brand/bbbq-mark.svg`
+      }
+    }
+  })} />
+</BaseLayout>

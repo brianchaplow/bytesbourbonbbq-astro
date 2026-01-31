@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RecipeCard from '../components/RecipeCard.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../data/site';
+
+const recipes = await getCollection('recipes', ({ data }) => {
+  return data.draft !== true;
+});
+
+// Get latest 6 recipes
+const latestRecipes = recipes
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 6);
+
+// Random delivery message
+const deliveryMessage = site.deliveryMessages[Math.floor(Math.random() * site.deliveryMessages.length)];
+---
+
+<BaseLayout>
+  
+  {/* Hero */}
+  <section class="relative isolate overflow-hidden">
+    {/* Background effects */}
+    <div class="absolute inset-0 -z-10">
+      <div class="absolute inset-0 bg-gradient-to-b from-orange-500/5 via-transparent to-transparent"></div>
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-orange-500/10 blur-[120px] rounded-full"></div>
+    </div>
+    
+    <div class="mx-auto max-w-7xl px-6 md:px-8 py-24 md:py-32">
+      <div class="text-center max-w-4xl mx-auto">
+        <p class="text-sm font-mono text-orange-400 tracking-wider uppercase mb-6">
+          Cyber by Day. Fire by Night.
+        </p>
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tight leading-tight">
+          Real BBQ.<br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-red-500 to-orange-400">Real Engineering.</span>
+        </h1>
+        <p class="mt-6 text-xl text-neutral-400 max-w-2xl mx-auto">
+          From pit temps and packet captures to bourbon pairings. We build, measure, and share.
+        </p>
+        
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a 
+            href="/recipes/" 
+            class="px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold hover:from-orange-400 hover:to-red-400 transition-all shadow-lg shadow-orange-500/25"
+          >
+            Browse Recipes
+          </a>
+          <a 
+            href="/about/" 
+            class="px-6 py-3 rounded-lg border border-white/20 hover:bg-white/5 transition-colors"
+          >
+            About the Pit
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Latest Recipes */}
+  {latestRecipes.length > 0 && (
+    <section class="py-16 md:py-24 border-t border-white/10">
+      <div class="mx-auto max-w-7xl px-6 md:px-8">
+        <div class="flex items-end justify-between mb-10">
+          <div>
+            <h2 class="text-3xl font-bold">Latest from the Pit</h2>
+            <p class="mt-2 text-neutral-400">Fresh off the smoker</p>
+          </div>
+          <a href="/recipes/" class="text-orange-400 hover:text-orange-300 text-sm font-medium">
+            View all →
+          </a>
+        </div>
+        
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {latestRecipes.map(recipe => (
+            <RecipeCard
+              title={recipe.data.title}
+              description={recipe.data.description}
+              image={recipe.data.image}
+              href={`/recipes/${recipe.slug}/`}
+              cyber_concept={recipe.data.cyber_concept}
+              cook_time={recipe.data.cook_time}
+              difficulty={recipe.data.difficulty}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {/* Newsletter CTA */}
+  <section class="py-16 md:py-24 border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-6 md:px-8">
+      <div class="relative rounded-2xl bg-gradient-to-br from-orange-500/10 via-red-500/5 to-transparent border border-orange-500/20 p-8 md:p-12 overflow-hidden">
+        {/* Glow effect */}
+        <div class="absolute -top-20 -right-20 w-60 h-60 bg-orange-500/20 blur-[80px] rounded-full"></div>
+        
+        <div class="relative max-w-2xl">
+          <h2 class="text-2xl md:text-3xl font-bold">Get Smoke Signals</h2>
+          <p class="mt-3 text-neutral-400">
+            New recipes, techniques, and the occasional cyber-BBQ crossover. 
+            <span class="text-neutral-500 italic">{deliveryMessage}</span>
+          </p>
+          
+          <div class="mt-6">
+            <a 
+              href={site.newsletter.signupUrl}
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-orange-500 hover:bg-orange-400 text-black font-semibold transition-colors"
+            >
+              <span>Subscribe</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
