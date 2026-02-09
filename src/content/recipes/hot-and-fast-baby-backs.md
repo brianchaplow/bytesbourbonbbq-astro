@@ -1,7 +1,7 @@
 ---
 title: "Hot and Fast Baby Backs: The OODA Loop Method"
 subtitle: "Observe. Orient. Decide. Act. Repeat until delicious."
-description: "Baby back ribs at 300°F using Boyd's OODA Loop—because great BBQ and good security both require decision cycles, not rigid timelines."
+description: "Baby back ribs at 300°F using Boyd's OODA Loop, because great BBQ and good security both require decision cycles, not rigid timelines."
 date: 2025-06-15
 image: /images/recipes/hot-and-fast-baby-backs/hero.jpg
 cyber_concept: "OODA Loop & Attack Surface Reduction"
@@ -41,18 +41,18 @@ instructions:
 aar:
   worked: "300°F cut total cook time nearly in half versus 3-2-1 with no quality loss. ACV sprays kept the surface moist during high-heat phase. Bend test proved far more reliable than time-based targets."
   adjust: "Try 275°F next time for slightly more smoke penetration while keeping the accelerated timeline. Consider honey in the wrap for a glaze option."
-  lessons: "Indicator-based cooking beats time-based every time. The caramelization tells you when to wrap, not the clock. Hot and fast demands tighter OODA loops—you can't zone out."
+  lessons: "Indicator-based cooking beats time-based every time. The caramelization tells you when to wrap, not the clock. Hot and fast demands tighter OODA loops. You can't zone out."
 ---
 
 **You don't fly a fighter jet on a preset flight plan.**
 
-You observe. You orient. You decide. You act. Then you do it again—faster than your adversary can respond.
+You observe. You orient. You decide. You act. Then you do it again, faster than your adversary can respond.
 
 Colonel John Boyd developed the OODA Loop to explain why some pilots consistently won dogfights while others didn't. It wasn't reflexes or aircraft specs. It was decision speed. The pilot who could cycle through observe-orient-decide-act faster controlled the engagement.
 
 BBQ works the same way. Especially hot and fast.
 
-At 300°F, you don't have the luxury of "set it and forget it." The margin for error shrinks. The cook moves faster. You need tighter decision loops—constant observation, rapid orientation, clear decision points, immediate action.
+At 300°F, you don't have the luxury of "set it and forget it." The margin for error shrinks. The cook moves faster. You need tighter decision loops: constant observation, rapid orientation, clear decision points, immediate action.
 
 ---
 
@@ -75,9 +75,9 @@ Every checkpoint is an OODA cycle. You gather data, interpret it against your me
 Traditional low-and-slow (225-250°F) is forgiving. You have wide margins. Time estimates are reliable because the thermal dynamics are slower.
 
 Hot and fast (275-325°F) is different:
-- **Faster Maillard reaction** — bark develops quicker
-- **Shorter cook window** — less time to course-correct
-- **More active management** — you're flying the plane, not on autopilot
+- **Faster Maillard reaction:** bark develops quicker
+- **Shorter cook window:** less time to course-correct
+- **More active management:** you're flying the plane, not on autopilot
 
 The tradeoff? You finish in 2.5-3 hours instead of 5-6. Same quality. Half the time. But you earn it through attention.
 
@@ -91,7 +91,7 @@ In cybersecurity, we talk about reducing attack surface and tightening feedback 
 - **Tighter monitoring** = faster detection of anomalies
 - **Rapid response** = course correction before cascade failure
 
-The 3-2-1 method is like quarterly security audits—structured, predictable, but slow to adapt. OODA-based cooking is continuous monitoring with automated response. Same goal, different tempo.
+The 3-2-1 method is like quarterly security audits, structured, predictable, but slow to adapt. OODA-based cooking is continuous monitoring with automated response. Same goal, different tempo.
 
 ---
 

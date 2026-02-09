@@ -39,7 +39,7 @@ custom_spice_blend:
 
 instructions:
   - "Set up Big Green Egg for indirect heat at 400°F."  
-  - "Halve jalapeños lengthwise and remove seeds and membranes. Boats, not canoes—leave a clean hull."
+  - "Halve jalapeños lengthwise and remove seeds and membranes. Boats, not canoes. Leave a clean hull."
   - "Mix custom cajun blend: paprika, white pepper, cumin, cayenne, chipotle, and kosher salt. Set aside."
   - "Bring cream cheese and goat cheese to room temperature. If your house runs cold, transfer to a glass bowl and microwave in 10-second bursts until softened."
   - "Add 2 tbsp custom cajun blend and cayenne hot sauce to cheese mixture. Mix until uniform."
@@ -51,8 +51,8 @@ instructions:
 
 aar:
   worked: "Boats hold cheese better than whole pepper style and they sit well on the grates. Thin-sliced homemade bacon crisped perfectly at 400°F. Homemade cayenne sauce in the cheese mix added depth without overwhelming (it is a Tabasco style sauce). BGE indirect held steady. Glass bowl for microwave softening saved the cold cheese situation."
-  adjust: "Reduce kosher salt in spice blend from 2 tsp to around 1 to 1 1/2 tsp—slightly salty this round. Use two bacon slices per boat for full spiral coverage. Slice more bacon next time."
-  lessons: "Supply chain pays off—homemade bacon and house hot sauce elevated this above any store-bought version. Boats > stuffed for cheese ratio and grill stability. 400°F hot and fast beats low and slow for poppers."
+  adjust: "Reduce kosher salt in spice blend from 2 tsp to around 1 to 1 1/2 tsp, slightly salty this round. Use two bacon slices per boat for full spiral coverage. Slice more bacon next time."
+  lessons: "Supply chain pays off. Homemade bacon and house hot sauce elevated this above any store-bought version. Boats > stuffed for cheese ratio and grill stability. 400°F hot and fast beats low and slow for poppers."
 ---
 
 ## Know Your Supply Chain
@@ -63,7 +63,7 @@ The same principle applies at the grill.
 
 Store-bought bacon? You're trusting someone else's cure ratios, their smoke source, their timeline. Pre-mixed cajun seasoning? You've handed over sodium levels, heat profiles, ingredient quality to a factory somewhere.
 
-These jalapeño boats run a different stack. The bacon curing in that vacuum bag? I know the exact salt ratio, the cure time, the smoke wood. That cayenne sauce with the "C" label? House-made, tested, documented. The cajun blend? Mixed to my specs—lower sodium, higher heat.
+These jalapeño boats run a different stack. The bacon curing in that vacuum bag? I know the exact salt ratio, the cure time, the smoke wood. That cayenne sauce with the "C" label? House-made, tested, documented. The cajun blend? Mixed to my specs: lower sodium, higher heat.
 
 When something goes wrong in your environment, you want to trace it back to the source. When something goes *right*, you want to replicate it exactly. You can't do either if your supply chain is a black box.
 
@@ -76,15 +76,15 @@ Traditional jalapeño poppers get cored and stuffed. You jam cheese into a peppe
 
 Boats solve the structural problem:
 
-- **More surface area** — Cheese fills the exposed hull with no overflow
-- **Better ratio** — More cheese per bite, less wasted pepper mass
-- **Grill stability** — A more flat bottom sits on grates without rolling
-- **Visual inspection** — You can see the cheese render in real-time
+- **More surface area:** Cheese fills the exposed hull with no overflow
+- **Better ratio:** More cheese per bite, less wasted pepper mass
+- **Grill stability:** A more flat bottom sits on grates without rolling
+- **Visual inspection:** You can see the cheese render in real-time
 
 It's the difference between a cramped container and proper architecture. Build for the use case.
 
 ![Halved jalapeño boats cleaned and ready](/images/recipes/jalapeno-boats/jalapeno-boats-cleaned.jpg)
-*Boats cleaned and staged. Seeds and membranes removed—adjust heat by leaving some membrane if you want more kick.*
+*Boats cleaned and staged. Seeds and membranes removed. Adjust heat by leaving some membrane if you want more kick.*
 
 ## Assembly
 
@@ -109,9 +109,9 @@ Two tablespoons of the blend plus the cayenne hot sauce go directly into the che
 
 ## Wrapping Protocol
 
-Thin-sliced bacon is mandatory at 400°F. Thick-cut won't render in time—you'll pull the boats with rubbery bacon or burnt cheese. There's no middle ground.
+Thin-sliced bacon is mandatory at 400°F. Thick-cut won't render in time. You'll pull the boats with rubbery bacon or burnt cheese. There's no middle ground.
 
-Spiral wrap from stem to tip. Plan for two slices per boat—that's 32 slices for a full batch of 16 boats. One slice leaves gaps and throws off the bacon-to-pepper ratio, and c'mon...bacon.
+Spiral wrap from stem to tip. Plan for two slices per boat, that's 32 slices for a full batch of 16 boats. One slice leaves gaps and throws off the bacon-to-pepper ratio, and c'mon...bacon.
 
 You could season the exterior after wrapping, your preference, I did not. The bacon would act as a canvas for additional cajun seasoning, building bark while it renders.
 
@@ -120,12 +120,12 @@ You could season the exterior after wrapping, your preference, I did not. The ba
 
 ## Execution
 
-Big Green Egg set up for indirect at 400°F. This is hot-and-fast territory—the goal is crispy bacon and melted cheese, not smoke penetration.
+Big Green Egg set up for indirect at 400°F. This is hot-and-fast territory: the goal is crispy bacon and melted cheese, not smoke penetration.
 
-Place boats cheese-side up directly on the grate. The foil pan is for transport and easy cleanup, not cooking—you want airflow around the bacon.
+Place boats cheese-side up directly on the grate. The foil pan is for transport and easy cleanup, not cooking. You want airflow around the bacon.
 
 ![Jalapeño boats cooking on Big Green Egg](/images/recipes/jalapeno-boats/jalapeno-boats-grill.jpg)
-*On the BGE, indirect at 400°F. Boats sit stable—no rolling, no cheese loss.*
+*On the BGE, indirect at 400°F. Boats sit stable: no rolling, no cheese loss.*
 
 40 minutes at this temp. The bacon renders, the cheese puffs and takes on color, the jalapeño softens without going mushy.
 
@@ -134,11 +134,11 @@ Place boats cheese-side up directly on the grate. The foil pan is for transport 
 
 ## Results
 
-The supply chain advantage shows up in the final product. The homemade bacon has a clean smoke flavor—no liquid smoke aftertaste, no mystery cure. The cayenne sauce adds heat with character, not just capsaicin. The custom spice blend seasons without oversalting (at least next time, doh).
+The supply chain advantage shows up in the final product. The homemade bacon has a clean smoke flavor: no liquid smoke aftertaste, no mystery cure. The cayenne sauce adds heat with character, not just capsaicin. The custom spice blend seasons without oversalting (at least next time, doh).
 
 Could you make these with store-bought components? Sure. They'd be fine. But "fine" isn't the point.
 
-When you control your inputs, you control your outputs. Every link in the chain is documented, tested, and trusted. That's supply chain security—on the grill and in the SOC.
+When you control your inputs, you control your outputs. Every link in the chain is documented, tested, and trusted. That's supply chain security, on the grill and in the SOC.
 
 ![Plated jalapeño boats in red ramekin](/images/recipes/jalapeno-boats/jalapeno-boats-plated.jpg)
 *Best version yet. The boats hold the ideal cheese-to-pepper-to-bacon ratio.*
@@ -154,10 +154,10 @@ When you control your inputs, you control your outputs. Every link in the chain 
 | Goat cheese | Store | Verified vendor |
 | Jalapeños | Store | Commodity |
 
-You don't have to make everything from scratch. But know *which* components matter most. The bacon and seasonings define this dish—those get full supply chain control. The cream cheese is a commodity input with a consistent spec. Different trust levels for different risk profiles.
+You don't have to make everything from scratch. But know *which* components matter most. The bacon and seasonings define this dish. Those get full supply chain control. The cream cheese is a commodity input with a consistent spec. Different trust levels for different risk profiles.
 
-*Store fallback for spice blend: Tony Chachere's Bold — lower sodium than original, more kick. Acceptable substitute when you can't mix your own.*
+*Store fallback for spice blend: Tony Chachere's Bold: lower sodium than original, more kick. Acceptable substitute when you can't mix your own.*
 
 ---
 
-*The boats format, the homemade bacon, the house hot sauce—this is what supply chain control tastes like. Build your stack intentionally.*
+*The boats format, the homemade bacon, the house hot sauce. This is what supply chain control tastes like. Build your stack intentionally.*
